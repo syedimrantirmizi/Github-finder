@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import Profile from './Profile';
 
 const Search = () => {
     const [inputValue, setInputValue] = useState("");
@@ -20,7 +21,7 @@ const Search = () => {
                 `https://api.github.com/users/${searchValue}`
             );
             setUserData(response.data)
-            console.log(response.data);
+            
             setBgColor("white")
         } catch (error) {
             alert("Something went wrong");
@@ -42,17 +43,7 @@ const Search = () => {
                     </button>
                 </div>
             </form>
-            <div className='flex justify-center p-5 '>
-                <div className={"gap-5 flex justify-center p-5 w-[500px] flex-col bg-" + bgColor} >
-                    <img src={userData?.avatar_url} alt="" />
-                    <div className="font-bold">
-                    <p className='text-gray-400'>
-                        {userData?.bio}
-                    </p>
-
-                    </div>
-                </div>
-            </div>
+            <Profile avatar_url={userData?.avatar_url} bio={userData?.bio} bgColor={bgColor} />
         </>
     );
 }
